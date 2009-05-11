@@ -21,13 +21,21 @@
 		$(function()
 			{
 				if (FastrSlowrPlayr.isAvailable()) {
-					var myPlayer = FastrSlowrPlayr.init(
+					var myPlayer1 = FastrSlowrPlayr.init(
 						{
 							createIn:	'#playerHolder',
 							mp3File:	'../mp3/amen.mp3',
 							autoplay:	true
 						}
 					);
+					var myPlayer2 = FastrSlowrPlayr.init(
+						{
+							createIn:	'#playerHolder',
+							mp3File:	'../mp3/amen.mp3',
+							autoplay:	false
+						}
+					);
+					console.log(myPlayer1, myPlayer2, myPlayer1.id, myPlayer2.id);
 				} else {
 					alert ('FastrSlowrPlayr cannot run in this page/ browser :(');
 				}

@@ -15,24 +15,34 @@
 var FastrSlowrPlayr = new function(element, settings)
 {
 
+	var players = [];
+
 	// public API
 	return {
 		/**
 		* Initialises a FastrSlowrPlayr instance.
 		* 
 		* @param settings Object An object containing a combination of the available options.
-		* @option volume Number
-		* @option pan Number
-		* @option autoplay Boolean
-		* @option playbackSpeed Number
 		* @option mp3File String
 		* @option createIn String?[whatever SWFObject supports]
+		* @option autoplay Boolean
 		* @option loop Boolean
+		* @option playbackSpeed Number
+		* @option volume Number
+		* @option pan Number
 		* @return Object A reference to the generated FastrSlowrPlayr. This instance has methods available to 
 		**/
 		init : function(settings)
 		{
-			
+			var player = new function()
+			{
+				var id = players.length;
+				return {
+					id: id
+				}
+			};
+			players.push(player);
+			return player;
 		},
 		/**
 		* Whether or not FastrSlowrPlayr is supported on this page (e.g. if the page has SWFObject loaded and
