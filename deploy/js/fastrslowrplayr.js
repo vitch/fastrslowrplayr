@@ -16,6 +16,18 @@ var FastrSlowrPlayr = new function(element, settings)
 {
 
 	var players = [];
+	
+	// util method to ensure that settins are a cloned object (rather than a reference) and that
+	// default settings are overridden with passed in settings...
+	var cloneSettings = function(s)
+	{
+		var cloned = {};
+		for (prop in FastrSlowrPlayr.defaults)
+		{
+			cloned[prop] = s[prop] || FastrSlowrPlayr.defaults[prop];
+		}
+		return cloned;
+	};
 
 	// public API
 	return {
@@ -37,6 +49,7 @@ var FastrSlowrPlayr = new function(element, settings)
 			var player = new function()
 			{
 				var id = players.length;
+				var s = cloneSettings(settings);
 				return {
 					id: id
 				}
@@ -53,8 +66,8 @@ var FastrSlowrPlayr = new function(element, settings)
 		{
 			return swfobject != null && swfobject.getFlashPlayerVersion().major > 9;
 		}
-	}
-}
+	};
+};
 
 FastrSlowrPlayr.defaults = {
 	volume:			1,
@@ -64,4 +77,4 @@ FastrSlowrPlayr.defaults = {
 	mp3File:		null,
 	createIn:		'body',
 	loop:			false
-}
+};
