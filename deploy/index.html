@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>FastrSlowrPlayr - a javascript widget to playback mp3 files with adjustable speed</title>
+		
+		<meta name="keywords" content="jquery,plugin,javascript,flash,mp3" />
+		<meta name="author" content="Kelvin Luck" />
+
+		<link rel="stylesheet" href="css/yui-reset-base-2.7.0.css" type="text/css" media="screen" />
+		<style type="text/css">
+		#container
+		{
+			width: 750px;
+		}
+		</style>
+
+		<script src="js/jquery.js" type="text/javascript"></script>
+		<script src="js/swfobject.js" type="text/javascript"></script>
+		<script src="js/fastrslowrplayr.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		$(function()
+			{
+				if (FastrSlowrPlayr.isAvailable()) {
+					var myPlayer = FastrSlowrPlayr.init(
+						{
+							createIn:	'#playerHolder',
+							mp3File:	'../mp3/amen.mp3',
+							autoplay:	true
+						}
+					);
+				} else {
+					alert ('FastrSlowrPlayr cannot run in this page/ browser :(');
+				}
+			}
+		);
+		</script>
+
+	</head>
+
+	<body>
+		<div id="container">
+			<h1>FastrSlowrPlayr</h1>
+			<p>
+				FastrSlowrPlayr is a javascript widget which allows you to embed a mp3 file and control it's playback via javascript. It provides you
+				with easy access to the various things you may want to do to the mp3 (e.g. playing, stopping, changing the volume etc) but it also
+				allows you to change the playback speed (and therefore pitch) of the playing mp3.
+			</p>
+			<p>
+				The simple example on this page shows how you can embed an mp3 in a page which automatically loads and plays. The swf which powers the
+				mp3 playback is included in the dev with an id of playerHolder (below) although it has no visual component so there is nothing to see
+				there...
+			</p>
+			<div id="playerHolder"></div>
+		</div>
+	</body>
+</html>
