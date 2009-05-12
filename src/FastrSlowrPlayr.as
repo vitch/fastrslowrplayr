@@ -2,12 +2,15 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.external.ExternalInterface;
 
 	/**
 	 * @author Kelvin Luck
 	 */
 	public class FastrSlowrPlayr extends Sprite 
 	{
+		
+		private var id:int;
 		
 		public function FastrSlowrPlayr()
 		{
@@ -17,7 +20,13 @@ package
 		private function onFirstFramePassed(event:Event):void
 		{
 			event.target.removeEventListener(event.type, arguments.callee);
-			trace ('READY TO GO!');
+			
+			id = loaderInfo.parameters.id;
+			
+			if (ExternalInterface.available) {
+				ExternalInterface.call('FastrSlowrPlayr.flOnReady', id);
+			}
 		}
+		
 	}
 }

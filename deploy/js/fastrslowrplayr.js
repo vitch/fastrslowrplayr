@@ -36,7 +36,8 @@ var FastrSlowrPlayr = new function(element, settings)
 		* 
 		* @param settings Object An object containing a combination of the available options.
 		* @option mp3File String
-		* @option createIn String?[whatever SWFObject supports]
+		* @option swfPath String
+		* @option createIn String?[whatever SWFObject supports] //TODO: It currently actually replaces the passed in element...
 		* @option autoplay Boolean
 		* @option loop Boolean
 		* @option playbackSpeed Number
@@ -50,6 +51,9 @@ var FastrSlowrPlayr = new function(element, settings)
 			{
 				var id = players.length;
 				var s = cloneSettings(settings);
+
+				swfobject.embedSWF(s.swfPath, s.createIn, "1", "1", "10.0.0", undefined, {id:id});
+
 				return {
 					id: id
 				}
@@ -65,6 +69,16 @@ var FastrSlowrPlayr = new function(element, settings)
 		isAvailable : function()
 		{
 			return swfobject != null && swfobject.getFlashPlayerVersion().major > 9;
+		},
+
+		// The following methods should not be called directly. They are used for callbacks from the flash file.
+		// Unfortunately, because of the nature of the ExternalInterface callbacks from Flash we can't make these
+		// methods private via code so instead we prefix them all with "fl" and document that they should never be
+		// called directly.
+
+		flOnReady : function(id)
+		{
+			alert('SWF id: ' + id + ' is ready to go!!');
 		}
 	};
 };
@@ -75,6 +89,7 @@ FastrSlowrPlayr.defaults = {
 	autoplay:		false,
 	playbackSpeed:	1,
 	mp3File:		null,
+	swfPath:		'/swf/FastrSlowrPlayr.swf',
 	createIn:		'body',
 	loop:			false
 };
