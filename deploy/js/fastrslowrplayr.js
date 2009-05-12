@@ -61,6 +61,18 @@ var FastrSlowrPlayr = new function(element, settings)
 					pan : s.pan
 				};
 
+				var doOnLoad = [];
+
+				// calls a method on the swf... If the swf isn't available yet then queues it to be done on load...
+				var callOnSwf = function(func, arg)
+				{
+					if (swf) {
+						swf[func](arg);
+					} else {
+						doOnLoad.push({func:func, arg:arg});
+					}
+				}
+
 				swfobject.embedSWF(s.swfPath, s.createIn, "1", "1", "10.0.0", {}, flashvars);
 				var swf;
 				
@@ -69,10 +81,10 @@ var FastrSlowrPlayr = new function(element, settings)
 					flOnReady : function()
 					{
 						swf = swfobject.getObjectById(s.createIn);
-						// incase any of these values have been changed since we passed the flashvars we pass them in again...
-						swf.setVolume(s.volume);
-						swf.setPan(s.pan);
-						swf.setPlaybackSpeed(s.playbackSpeed);
+						// call any functions that were queued while we were loading...
+						for (var i=0; i<doOnLoad.length; i++) {
+							callOnSwf(doOnLoad[i].func, doOnLoad[i].arg);
+						}
 						// if an mp3 file was specified then we load it...
 						if (s.mp3File) {
 							swf.loadMp3(s.mp3File);
@@ -94,28 +106,15 @@ var FastrSlowrPlayr = new function(element, settings)
 					id :				id,
 					setVolume :			function(value) 
 										{
-											if (swf) {
-												swf.setVolume(value);
-											} else {
-												s.volume = value;
-											}
+											callOnSwf('setVolume', value);
 										},
 					setPan :			function(value) 
 										{
-											if (swf) {
-												swf.setPan(value);
-											} else {
-												s.pan = value;
-											}
+											callOnSwf('setPan', value);
 										},
 					setPlaybackSpeed :	function(value) 
 										{
-											console.log('setPlaybackSpeed', swf, s);
-											if (swf) {
-												swf.setPlaybackSpeed(value);
-											} else {
-												s.playbackSpeed = value;
-											}
+											callOnSwf('setPlaybackSpeed', value);
 										}
 				}
 			};
