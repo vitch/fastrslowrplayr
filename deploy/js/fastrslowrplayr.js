@@ -69,6 +69,11 @@ var FastrSlowrPlayr = new function(element, settings)
 					flOnReady : function()
 					{
 						swf = swfobject.getObjectById(s.createIn);
+						// incase any of these values have been changed since we passed the flashvars we pass them in again...
+						swf.setVolume(s.volume);
+						swf.setPan(s.pan);
+						swf.setPlaybackSpeed(s.playbackSpeed);
+						// if an mp3 file was specified then we load it...
 						if (s.mp3File) {
 							swf.loadMp3(s.mp3File);
 						}
@@ -86,7 +91,32 @@ var FastrSlowrPlayr = new function(element, settings)
 				
 				// return our public API for use by 
 				return {
-					id : id
+					id :				id,
+					setVolume :			function(value) 
+										{
+											if (swf) {
+												swf.setVolume(value);
+											} else {
+												s.volume = value;
+											}
+										},
+					setPan :			function(value) 
+										{
+											if (swf) {
+												swf.setPan(value);
+											} else {
+												s.pan = value;
+											}
+										},
+					setPlaybackSpeed :	function(value) 
+										{
+											console.log('setPlaybackSpeed', swf, s);
+											if (swf) {
+												swf.setPlaybackSpeed(value);
+											} else {
+												s.playbackSpeed = value;
+											}
+										}
 				}
 			};
 			return player;
@@ -119,7 +149,7 @@ var FastrSlowrPlayr = new function(element, settings)
 
 FastrSlowrPlayr.defaults = {
 	volume:			1,
-	pan:			1,
+	pan:			0,
 	autoplay:		false,
 	playbackSpeed:	1,
 	mp3File:		null,

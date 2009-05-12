@@ -4,9 +4,7 @@ package
 
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.SampleDataEvent;
 	import flash.external.ExternalInterface;
-	import flash.media.Sound;
 	import flash.net.URLRequest;
 
 	/**
@@ -40,9 +38,11 @@ package
 			if (ExternalInterface.available) {
 				ExternalInterface.addCallback('loadMp3', loadMp3);
 				ExternalInterface.addCallback('playMp3', playMp3);
+				ExternalInterface.addCallback('setPlaybackSpeed', setPlaybackSpeed);
+				ExternalInterface.addCallback('setVolume', setVolume);
+				ExternalInterface.addCallback('setPan', setPan);
 				ExternalInterface.call('FastrSlowrPlayr.flOnReady', id);
 			}
-			
 		}
 
 		// external interface methods...
@@ -62,7 +62,22 @@ package
 			// TODO: Logic to deal with when playMp3 is called before the mp3 has finished loading...
 			mp3Player.play();
 		}
-		
+
+		private function setPlaybackSpeed(value:Number):void
+		{
+			mp3Player.playbackSpeed = value;
+		}
+
+		private function setVolume(value:Number):void
+		{
+			mp3Player.volume = value;
+		}
+
+		private function setPan(value:Number):void
+		{
+			mp3Player.pan = value;
+		}
+
 		// listeners
 		
 		private function onMp3Loaded(event:Event=null):void

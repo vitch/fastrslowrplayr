@@ -35,6 +35,13 @@
 							autoplay:	false
 						}
 					);
+					// test the setters for pan, volume and playback speed work both before and after the swf has loaded...
+					myPlayer1.setPan(-1);
+					myPlayer1.setPlaybackSpeed(.5);
+					setTimeout(function() {
+						myPlayer1.setPan(1);
+						myPlayer1.setPlaybackSpeed(1);
+					}, 5000);
 				} else {
 					alert ('FastrSlowrPlayr cannot run in this page/ browser :(');
 				}
