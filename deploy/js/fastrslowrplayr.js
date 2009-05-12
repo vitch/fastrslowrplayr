@@ -14,7 +14,8 @@
 
 var FastrSlowrPlayr = new function(element, settings)
 {
-
+	
+	// used to hold our privateAPI closures...
 	var players = [];
 	
 	// util method to ensure that settins are a cloned object (rather than a reference) and that
@@ -54,9 +55,9 @@ var FastrSlowrPlayr = new function(element, settings)
 
 				swfobject.embedSWF(s.swfPath, s.createIn, "1", "1", "10.0.0", {}, {id:id});
 				var swf;
-
-				return {
-					id: id,
+				
+				// create our private API for use from the fl* callbacks methods from flash...
+				var privateAPI = {
 					flOnReady: function()
 					{
 						swf = swfobject.getObjectById(s.createIn);
@@ -64,9 +65,15 @@ var FastrSlowrPlayr = new function(element, settings)
 							swf.loadMp3(s.mp3File);
 						}
 					}
+				};
+				// and add the private API to the array for later retrieval by id...
+				players.push(privateAPI);
+				
+				// return our public API for use by 
+				return {
+					id: id
 				}
 			};
-			players.push(player);
 			return player;
 		},
 		/**
