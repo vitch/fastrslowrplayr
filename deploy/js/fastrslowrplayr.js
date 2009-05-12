@@ -36,15 +36,17 @@ var FastrSlowrPlayr = new function(element, settings)
 		* Initialises a FastrSlowrPlayr instance.
 		* 
 		* @param settings Object An object containing a combination of the available options.
-		* @option mp3File String The path to the mp3 file you want to load (relative to the .swf file).
-		* @option swfPath String The path to the FastrSlowrPlayr.swf file (relative to this javascript file).
-		* @option createIn String?[whatever SWFObject supports] //TODO: It currently actually replaces the passed in element...
+		* @option mp3File String The path to the mp3 file you want to load (absolute or relative to the .swf file).
+		* @option swfPath String The path to the FastrSlowrPlayr.swf file (absolute or relative to this javascript file).
+		* @option elementId String Specifies the id of the HTML element (containing your alternative content) you would 
+		* like to have replaced by your FastrSlowrPlayr.
 		* @option autoplay Boolean Whether the mp3 should start playing automatically when it's loaded.
 		* @option loop Boolean Whether the mp3 should loop once it's finished playing.
 		* @option playbackSpeed Number The speed playback should be at. Any positive number is valid, 1 = normal speed.
 		* @option volume Number The volume the mp3 should be played at - between 0 and 1.
 		* @option pan Number How the mp3 should be panned. A number from -1 (fully left) to +1 (fully right). 0 is centrally panned.
-		* @return Object A reference to the generated FastrSlowrPlayr. This instance has methods available to 
+		* @return Object A reference to the generated FastrSlowrPlayr. This instance has methods available to load, start, stop, 
+		* pause, etc the mp3
 		**/
 		init : function(settings)
 		{
@@ -77,14 +79,14 @@ var FastrSlowrPlayr = new function(element, settings)
 					}
 				}
 
-				swfobject.embedSWF(s.swfPath, s.createIn, "1", "1", "10.0.0", {}, flashvars);
+				swfobject.embedSWF(s.swfPath, s.elementId, "1", "1", "10.0.0", {}, flashvars);
 				var swf;
 				
 				// create our private API for use from the fl* callbacks methods from flash...
 				var privateAPI = {
 					flOnReady : function()
 					{
-						swf = swfobject.getObjectById(s.createIn);
+						swf = swfobject.getObjectById(s.elementId);
 						// call any functions that were queued while we were loading...
 						for (var i=0; i<doOnLoad.length; i++) {
 							callOnSwf(doOnLoad[i].func, doOnLoad[i].arg);
@@ -169,6 +171,6 @@ FastrSlowrPlayr.defaults = {
 	playbackSpeed:	1,
 	mp3File:		null,
 	swfPath:		'../swf/FastrSlowrPlayr.swf',
-	createIn:		'body',
+	elementId:		'body',
 	loop:			false
 };
