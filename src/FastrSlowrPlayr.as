@@ -38,6 +38,8 @@ package
 			if (ExternalInterface.available) {
 				ExternalInterface.addCallback('loadMp3', loadMp3);
 				ExternalInterface.addCallback('playMp3', playMp3);
+				ExternalInterface.addCallback('pauseMp3', pauseMp3);
+				ExternalInterface.addCallback('stopMp3', stopMp3);
 				ExternalInterface.addCallback('setPlaybackSpeed', setPlaybackSpeed);
 				ExternalInterface.addCallback('setVolume', setVolume);
 				ExternalInterface.addCallback('setPan', setPan);
@@ -59,8 +61,26 @@ package
 			if (!hasMp3) {
 				throw new Error('Cannot play an mp3 when no file has been specified!');
 			}
-			// TODO: Logic to deal with when playMp3 is called before the mp3 has finished loading...
+			// TODO: Logic to deal with when playMp3 is called before the mp3 has finished loading... Or move these tests into JS?
 			mp3Player.play();
+		}
+		
+		private function pauseMp3():void
+		{
+			if (!hasMp3) {
+				throw new Error('Cannot pause an mp3 when no file has been specified!');
+			}
+			// TODO: Logic to deal with when pauseMp3 is called before the mp3 has finished loading... Or move these tests into JS?
+			mp3Player.pause();
+		}
+
+		private function stopMp3():void
+		{
+			if (!hasMp3) {
+				throw new Error('Cannot stop an mp3 when no file has been specified!');
+			}
+			// TODO: Logic to deal with when stopMp3 is called before the mp3 has finished loading... Or move these tests into JS?
+			mp3Player.stop();
 		}
 
 		private function setPlaybackSpeed(value:Number):void

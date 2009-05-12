@@ -67,7 +67,11 @@ var FastrSlowrPlayr = new function(element, settings)
 				var callOnSwf = function(func, arg)
 				{
 					if (swf) {
-						swf[func](arg);
+						if (arg != null) {
+							swf[func](arg);
+						} else {
+							swf[func]();
+						}
 					} else {
 						doOnLoad.push({func:func, arg:arg});
 					}
@@ -115,6 +119,18 @@ var FastrSlowrPlayr = new function(element, settings)
 					setPlaybackSpeed :	function(value) 
 										{
 											callOnSwf('setPlaybackSpeed', value);
+										},
+					play :				function()
+										{
+											callOnSwf('playMp3', null);
+										},
+					pause :				function()
+										{
+											callOnSwf('pauseMp3', null);
+										},
+					stop :				function()
+										{
+											callOnSwf('stopMp3', null);
 										}
 				}
 			};

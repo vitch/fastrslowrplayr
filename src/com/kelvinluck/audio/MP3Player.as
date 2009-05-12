@@ -85,6 +85,12 @@ package com.kelvinluck.audio
 			_channel.addEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 		}
 		
+		public function pause():void
+		{
+			// TODO: Check this actually works!
+			_channel.stop();
+		}
+
 		public function stop():void
 		{
 			if (_dynamicSound) {
