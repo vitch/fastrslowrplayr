@@ -35,14 +35,14 @@ var FastrSlowrPlayr = new function(element, settings)
 		* Initialises a FastrSlowrPlayr instance.
 		* 
 		* @param settings Object An object containing a combination of the available options.
-		* @option mp3File String
-		* @option swfPath String
+		* @option mp3File String The path to the mp3 file you want to load (relative to the .swf file).
+		* @option swfPath String The path to the FastrSlowrPlayr.swf file (relative to this javascript file).
 		* @option createIn String?[whatever SWFObject supports] //TODO: It currently actually replaces the passed in element...
-		* @option autoplay Boolean
-		* @option loop Boolean
-		* @option playbackSpeed Number
-		* @option volume Number
-		* @option pan Number
+		* @option autoplay Boolean Whether the mp3 should start playing automatically when it's loaded.
+		* @option loop Boolean Whether the mp3 should loop once it's finished playing.
+		* @option playbackSpeed Number The speed playback should be at. Any positive number is valid, 1 = normal speed.
+		* @option volume Number The volume the mp3 should be played at - between 0 and 1.
+		* @option pan Number How the mp3 should be panned. A number from -1 (fully left) to +1 (fully right). 0 is centrally panned.
 		* @return Object A reference to the generated FastrSlowrPlayr. This instance has methods available to 
 		**/
 		init : function(settings)
@@ -89,7 +89,7 @@ FastrSlowrPlayr.defaults = {
 	autoplay:		false,
 	playbackSpeed:	1,
 	mp3File:		null,
-	swfPath:		'/swf/FastrSlowrPlayr.swf',
+	swfPath:		'../swf/FastrSlowrPlayr.swf',
 	createIn:		'body',
 	loop:			false
 };
