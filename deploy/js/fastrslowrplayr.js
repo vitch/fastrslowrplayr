@@ -52,10 +52,18 @@ var FastrSlowrPlayr = new function(element, settings)
 				var id = players.length;
 				var s = cloneSettings(settings);
 
-				swfobject.embedSWF(s.swfPath, s.createIn, "1", "1", "10.0.0", undefined, {id:id});
+				swfobject.embedSWF(s.swfPath, s.createIn, "1", "1", "10.0.0", {}, {id:id});
+				var swf;
 
 				return {
-					id: id
+					id: id,
+					flOnReady: function()
+					{
+						swf = swfobject.getObjectById(s.createIn);
+						if (s.mp3File) {
+							swf.loadMp3(s.mp3File);
+						}
+					}
 				}
 			};
 			players.push(player);
@@ -78,7 +86,11 @@ var FastrSlowrPlayr = new function(element, settings)
 
 		flOnReady : function(id)
 		{
-			alert('SWF id: ' + id + ' is ready to go!!');
+			players[id].flOnReady();
+		},
+		flOnMP3Loaded : function(id)
+		{
+			alert('MP3 loaded on element ' + id);
 		}
 	};
 };
