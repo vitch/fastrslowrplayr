@@ -1,12 +1,13 @@
 package  
 {
-	import flash.net.URLRequest;
-	import flash.events.SampleDataEvent;
+	import com.kelvinluck.audio.MP3Player;
+
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.SampleDataEvent;
 	import flash.external.ExternalInterface;
 	import flash.media.Sound;
-	import flash.media.SoundChannel;
+	import flash.net.URLRequest;
 
 	/**
 	 * @author Kelvin Luck
@@ -15,9 +16,8 @@ package
 	{
 		
 		private var id:int;
-		private var s:Sound;
-		private var playbackSound:Sound;
-		private var sc:SoundChannel;
+		private var mp3Player:MP3Player;
+		private var hasMp3:Boolean;
 		
 		public function FastrSlowrPlayr()
 		{
@@ -28,56 +28,49 @@ package
 		{
 			event.target.removeEventListener(event.type, arguments.callee);
 			
+			mp3Player = new MP3Player();
+			mp3Player.addEventListener(MP3Player.MP3_LOADED, onMp3Loaded);
+			
 			id = loaderInfo.parameters.id;
+			mp3Player.playbackSpeed = loaderInfo.parameters.playbackSpeed;
+			mp3Player.volume = loaderInfo.parameters.volume;
+			mp3Player.pan = loaderInfo.parameters.pan;
+			mp3Player.loop = loaderInfo.parameters.loop == 'true';
 			
 			if (ExternalInterface.available) {
 				ExternalInterface.addCallback('loadMp3', loadMp3);
+				ExternalInterface.addCallback('playMp3', playMp3);
 				ExternalInterface.call('FastrSlowrPlayr.flOnReady', id);
 			}
+			
 		}
-		
+
 		// external interface methods...
 		
 		private function loadMp3(path:String):void
 		{
-			clearActiveSound();
-			s = new Sound();
-			s.addEventListener(Event.COMPLETE, onSoundLoaded);
-			s.load(new URLRequest(path));
+			hasMp3 = true;
+			mp3Player.stop();
+			mp3Player.load(new URLRequest(path));
+		}
+
+		private function playMp3():void
+		{
+			if (!hasMp3) {
+				throw new Error('Cannot play an mp3 when no file has been specified!');
+			}
+			// TODO: Logic to deal with when playMp3 is called before the mp3 has finished loading...
+			mp3Player.play();
 		}
 		
 		// listeners
 		
-		private function onSoundLoaded(event:Event):void
+		private function onMp3Loaded(event:Event=null):void
 		{
 			ExternalInterface.call('FastrSlowrPlayr.flOnMP3Loaded', id);
 		}
 		
-		private function onSampleData(event:SampleDataEvent):void
-		{
-		}
-		
-		private function onSoundComplete(event:Event):void
-		{
-		}
-		
 		// util methods
 		
-		private function clearActiveSound():void
-		{
-			if (sc) {
-				sc.stop();
-				sc.removeEventListener(Event.SOUND_COMPLETE, onSoundComplete);
-				sc = null;
-			}
-			if (s) {
-				s.removeEventListener(Event.COMPLETE, onSoundLoaded);
-				s = null;
-			}
-			if (playbackSound) {
-				playbackSound.removeEventListener(SampleDataEvent.SAMPLE_DATA, onSampleData);
-				playbackSound = null;
-			}
-		}
 	}
 }

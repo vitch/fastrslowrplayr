@@ -53,16 +53,31 @@ var FastrSlowrPlayr = new function(element, settings)
 				var id = players.length;
 				var s = cloneSettings(settings);
 
-				swfobject.embedSWF(s.swfPath, s.createIn, "1", "1", "10.0.0", {}, {id:id});
+				var flashvars = {
+					id : id,
+					playbackSpeed : s.playbackSpeed,
+					loop : s.loop,
+					volume : s.volume,
+					pan : s.pan
+				};
+
+				swfobject.embedSWF(s.swfPath, s.createIn, "1", "1", "10.0.0", {}, flashvars);
 				var swf;
 				
 				// create our private API for use from the fl* callbacks methods from flash...
 				var privateAPI = {
-					flOnReady: function()
+					flOnReady : function()
 					{
 						swf = swfobject.getObjectById(s.createIn);
 						if (s.mp3File) {
 							swf.loadMp3(s.mp3File);
+						}
+					},
+					flOnMP3Loaded : function()
+					{
+						// TODO: Dispatch an event/ call a listener to allow the page to react to this...
+						if (s.autoplay) {
+							swf.playMp3();
 						}
 					}
 				};
@@ -71,7 +86,7 @@ var FastrSlowrPlayr = new function(element, settings)
 				
 				// return our public API for use by 
 				return {
-					id: id
+					id : id
 				}
 			};
 			return player;
@@ -97,7 +112,7 @@ var FastrSlowrPlayr = new function(element, settings)
 		},
 		flOnMP3Loaded : function(id)
 		{
-			alert('MP3 loaded on element ' + id);
+			players[id].flOnMP3Loaded();
 		}
 	};
 };
