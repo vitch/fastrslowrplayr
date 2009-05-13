@@ -110,18 +110,26 @@ var FastrSlowrPlayr = new function(element, settings)
 				// return our public API for use by 
 				return {
 					id :				id,
-					// TODO: Setters should update s where swf == null so that calling getters before swf loads returns correct value...
 					setVolume :			function(value) 
 										{
-											callOnSwf('setVolume', value);
+											s.volume = value;
+											if (swf) {
+												swf.setVolume(value);
+											}
 										},
 					setPan :			function(value) 
 										{
-											callOnSwf('setPan', value);
+											s.pan = value;
+											if (swf) {
+												swf.setPan(value);
+											}
 										},
 					setPlaybackSpeed :	function(value) 
 										{
-											callOnSwf('setPlaybackSpeed', value);
+											s.playbackSpeed = value;
+											if (swf) {
+												swf.setPlaybackSpeed(value);
+											}
 										},
 					getVolume :			function()
 										{
