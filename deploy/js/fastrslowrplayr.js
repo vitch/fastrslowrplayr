@@ -143,10 +143,17 @@ var FastrSlowrPlayr = new function(element, settings)
 												return swf.getPlaybackSpeed();
 											}
 											return s.playbackSpeed;
-										},
+										},					
+					/**
+					 * @return The position of the playhead as a percentage of the total length of
+					 * the loaded mp3 (0 - 1).
+					 */
 					getPlayheadPosition : function()
 										{
-											throw new Error('Not implemented yet!');
+											if (swf) {
+												return swf.getPlayheadPosition();
+											}
+											return 0;
 										},
 					play :				function()
 										{

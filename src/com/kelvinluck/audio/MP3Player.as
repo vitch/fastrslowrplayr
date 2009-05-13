@@ -20,6 +20,7 @@ package com.kelvinluck.audio
 		private static const BYTES_PER_CALLBACK:int = 4096; // Should be >= 2048 && <= 8192
 
 		private var _playbackSpeed:Number = 1;
+
 		public function get playbackSpeed():Number
 		{
 			return _playbackSpeed;
@@ -32,6 +33,15 @@ package com.kelvinluck.audio
 			_playbackSpeed = value;
 		}
 		
+		/**
+		 * @return The position of the playhead as a percentage of the total length of
+		 * the loaded mp3 (0 - 1).
+		 */
+		public function get playheadPosition():Number
+		{
+			return _phase / _numSamples;
+		}
+
 		public var loop:Boolean;
 		
 		private var _volume:Number;

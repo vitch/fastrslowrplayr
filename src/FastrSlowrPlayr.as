@@ -46,6 +46,7 @@ package
 				ExternalInterface.addCallback('getPlaybackSpeed', getPlaybackSpeed);
 				ExternalInterface.addCallback('getVolume', getVolume);
 				ExternalInterface.addCallback('getPan', getPan);
+				ExternalInterface.addCallback('getPlayheadPosition', getPlayheadPosition);
 				ExternalInterface.call('FastrSlowrPlayr.flOnReady', id);
 			}
 		}
@@ -114,6 +115,11 @@ package
 		private function getPan():Number
 		{
 			return mp3Player.pan;
+		}
+		
+		private function getPlayheadPosition():Number
+		{
+			return mp3Player.playheadPosition;
 		}
 
 		// listeners
