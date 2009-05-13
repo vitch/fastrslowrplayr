@@ -43,6 +43,7 @@ package
 				ExternalInterface.addCallback('setPlaybackSpeed', setPlaybackSpeed);
 				ExternalInterface.addCallback('setVolume', setVolume);
 				ExternalInterface.addCallback('setPan', setPan);
+				ExternalInterface.addCallback('setPlayheadPosition', setPlayheadPosition);
 				ExternalInterface.addCallback('getPlaybackSpeed', getPlaybackSpeed);
 				ExternalInterface.addCallback('getVolume', getVolume);
 				ExternalInterface.addCallback('getPan', getPan);
@@ -100,6 +101,11 @@ package
 		private function setPan(value:Number):void
 		{
 			mp3Player.pan = value;
+		}
+		
+		private function setPlayheadPosition(value:Number):void
+		{
+			mp3Player.playheadPosition = value;
 		}
 		
 		private function getPlaybackSpeed():Number

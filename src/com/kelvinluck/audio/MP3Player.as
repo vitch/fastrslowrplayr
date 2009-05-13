@@ -41,6 +41,10 @@ package com.kelvinluck.audio
 		{
 			return _phase / _numSamples;
 		}
+		public function set playheadPosition(value:Number):void
+		{
+			_phase = value * _numSamples;
+		}
 
 		public var loop:Boolean;
 		
@@ -111,6 +115,8 @@ package com.kelvinluck.audio
 			// TODO: Check this actually works!
 			_channel.stop();
 		}
+		
+		// TODO: unpause??
 
 		public function stop():void
 		{

@@ -131,6 +131,10 @@ var FastrSlowrPlayr = new function(element, settings)
 												swf.setPlaybackSpeed(value);
 											}
 										},
+					setPlayheadPosition : function(value)
+										{
+											callOnSwf('setPlayheadPosition', value);
+										},
 					getVolume :			function()
 										{
 											if (swf) {
