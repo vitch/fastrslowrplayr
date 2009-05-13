@@ -110,6 +110,7 @@ var FastrSlowrPlayr = new function(element, settings)
 				// return our public API for use by 
 				return {
 					id :				id,
+					// TODO: Setters should update s where swf == null so that calling getters before swf loads returns correct value...
 					setVolume :			function(value) 
 										{
 											callOnSwf('setVolume', value);
@@ -124,15 +125,24 @@ var FastrSlowrPlayr = new function(element, settings)
 										},
 					getVolume :			function()
 										{
-											throw new Error('Not implemented yet!');
+											if (swf) {
+												return swf.getVolume();
+											}
+											return s.volume;
 										},
 					getPan :			function()
 										{
-											throw new Error('Not implemented yet!');
+											if (swf) {
+												return swf.getPan();
+											}
+											return s.pan;
 										},
 					getPlaybackSpeed :	function()
 										{
-											throw new Error('Not implemented yet!');
+											if (swf) {
+												return swf.getPlaybackSpeed();
+											}
+											return s.playbackSpeed;
 										},
 					getPlayheadPosition : function()
 										{

@@ -20,7 +20,10 @@ package com.kelvinluck.audio
 		private static const BYTES_PER_CALLBACK:int = 4096; // Should be >= 2048 && <= 8192
 
 		private var _playbackSpeed:Number = 1;
-
+		public function get playbackSpeed():Number
+		{
+			return _playbackSpeed;
+		}
 		public function set playbackSpeed(value:Number):void
 		{
 			if (value < 0) {
@@ -32,6 +35,10 @@ package com.kelvinluck.audio
 		public var loop:Boolean;
 		
 		private var _volume:Number;
+		public function get volume():Number
+		{
+			return _volume;
+		}
 		public function set volume(value:Number):void
 		{
 			_volume = value;
@@ -39,6 +46,10 @@ package com.kelvinluck.audio
 		}
 
 		private var _pan:Number;
+		public function get pan():Number
+		{
+			return _pan;
+		}
 		public function set pan(value:Number):void
 		{
 			_pan = value;

@@ -38,9 +38,15 @@
 					// test the setters for pan, volume and playback speed work both before and after the swf has loaded...
 					myPlayer1.setPan(-1);
 					myPlayer1.setPlaybackSpeed(.5);
+					console.log(myPlayer1.getVolume());
+					console.log(myPlayer1.getPan());
+					console.log(myPlayer1.getPlaybackSpeed());
 					setTimeout(function() {
 						myPlayer1.setPan(1);
 						myPlayer1.setPlaybackSpeed(1);
+						console.log(myPlayer1.getVolume());
+						console.log(myPlayer1.getPan());
+						console.log(myPlayer1.getPlaybackSpeed());
 					}, 5000);
 					// test to see if stop method works
 					setTimeout(function() {

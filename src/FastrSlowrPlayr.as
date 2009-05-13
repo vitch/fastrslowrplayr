@@ -43,6 +43,9 @@ package
 				ExternalInterface.addCallback('setPlaybackSpeed', setPlaybackSpeed);
 				ExternalInterface.addCallback('setVolume', setVolume);
 				ExternalInterface.addCallback('setPan', setPan);
+				ExternalInterface.addCallback('getPlaybackSpeed', getPlaybackSpeed);
+				ExternalInterface.addCallback('getVolume', getVolume);
+				ExternalInterface.addCallback('getPan', getPan);
 				ExternalInterface.call('FastrSlowrPlayr.flOnReady', id);
 			}
 		}
@@ -96,6 +99,21 @@ package
 		private function setPan(value:Number):void
 		{
 			mp3Player.pan = value;
+		}
+		
+		private function getPlaybackSpeed():Number
+		{
+			return mp3Player.playbackSpeed;
+		}
+
+		private function getVolume():Number
+		{
+			return mp3Player.volume;
+		}
+
+		private function getPan():Number
+		{
+			return mp3Player.pan;
 		}
 
 		// listeners
