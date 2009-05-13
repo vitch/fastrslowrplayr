@@ -122,6 +122,22 @@ var FastrSlowrPlayr = new function(element, settings)
 										{
 											callOnSwf('setPlaybackSpeed', value);
 										},
+					getVolume :			function()
+										{
+											throw new Error('Not implemented yet!');
+										},
+					getPan :			function()
+										{
+											throw new Error('Not implemented yet!');
+										},
+					getPlaybackSpeed :	function()
+										{
+											throw new Error('Not implemented yet!');
+										},
+					getPlayheadPosition : function()
+										{
+											throw new Error('Not implemented yet!');
+										},
 					play :				function()
 										{
 											callOnSwf('playMp3', null);
@@ -133,6 +149,10 @@ var FastrSlowrPlayr = new function(element, settings)
 					stop :				function()
 										{
 											callOnSwf('stopMp3', null);
+										},
+					addEventListener :	function(eventName, callback)
+										{
+											throw new Error('Not implemented yet!');
 										}
 				}
 			};
@@ -147,6 +167,12 @@ var FastrSlowrPlayr = new function(element, settings)
 		{
 			return swfobject != null && swfobject.getFlashPlayerVersion().major > 9;
 		},
+
+		// The following properties are constants for each of the event names that can be listened too. This
+		// is better than just using "magic strings" as it reduces the chances of mis-spelling etc...
+		EVENT_ID3_LOADED : 'id3Loaded',
+		EVENT_MP3_LOADED : 'mp3Loaded',
+		EVENT_MP3_COMPLETE : 'mp3Complete',
 
 		// The following methods should not be called directly. They are used for callbacks from the flash file.
 		// Unfortunately, because of the nature of the ExternalInterface callbacks from Flash we can't make these
