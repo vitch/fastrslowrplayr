@@ -1,5 +1,6 @@
 package com.kelvinluck.audio 
 {
+	import flash.media.ID3Info;	
 	import flash.media.SoundTransform;
 	import flash.events.EventDispatcher;
 	import flash.events.Event;
@@ -16,6 +17,7 @@ package com.kelvinluck.audio
 	{
 		
 		public static const MP3_LOADED:String = 'mp3Loaded';
+		public static const ID3_AVAILABLE:String = 'mp3Available';
 		
 		private static const BYTES_PER_CALLBACK:int = 4096; // Should be >= 2048 && <= 8192
 
@@ -69,6 +71,11 @@ package com.kelvinluck.audio
 			_pan = value;
 			updateSoundTransform();
 		}
+		
+		public function get id3Info():ID3Info
+		{
+			return _mp3.id3;
+		}
 
 		private var _mp3:Sound;
 		private var _dynamicSound:Sound;
@@ -87,6 +94,7 @@ package com.kelvinluck.audio
 		{
 			_mp3 = new Sound();
 			_mp3.addEventListener(Event.COMPLETE, onMp3Loaded);
+			_mp3.addEventListener(Event.ID3, onId3Loaded);
 			_mp3.load(request);
 		}
 
@@ -139,6 +147,11 @@ package com.kelvinluck.audio
 		private function onMp3Loaded(event:Event):void
 		{
 			dispatchEvent(new Event(MP3Player.MP3_LOADED));
+		}
+		
+		private function onId3Loaded(event:Event):void
+		{
+			dispatchEvent(new Event(MP3Player.ID3_AVAILABLE));
 		}
 
 		private function onSoundFinished(event:Event):void

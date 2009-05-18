@@ -24,13 +24,22 @@
 					var myPlayer1 = FastrSlowrPlayr.init(
 						{
 							elementId:	'playerHolder',
-							mp3File:	'../mp3/amen.mp3',
+							mp3File:	'../mp3/MaTafouGninO.mp3',
 							autoplay:	true
 						}
 					);
 					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_MP3_LOADED, function()
 						{
 							console.log('MP3 LOADED');
+						}
+					);
+					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_ID3_AVAILABLE, function(id3Data)
+						{
+							if (id3Data) {
+								console.log('ID3 AVAILABLE', id3Data);
+								// it seems to be triggered multiple times - we only want the first one...
+								myPlayer1.removeEventListener(FastrSlowrPlayr.EVENT_ID3_AVAILABLE);
+							}
 						}
 					);
 					var myPlayer2 = FastrSlowrPlayr.init(

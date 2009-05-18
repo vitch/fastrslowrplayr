@@ -114,6 +114,10 @@ var FastrSlowrPlayr = new function(element, settings)
 						if (s.autoplay) {
 							swf.playMp3();
 						}
+					},
+					flOnMP3Loaded : function(id3Data)
+					{
+						dispatchEvent(FastrSlowrPlayr.EVENT_ID3_AVAILABLE, [id3Data]);
 					}
 				};
 				// and add the private API to the array for later retrieval by id...
@@ -244,7 +248,7 @@ var FastrSlowrPlayr = new function(element, settings)
 
 		// The following properties are constants for each of the event names that can be listened too. This
 		// is better than just using "magic strings" as it reduces the chances of mis-spelling etc...
-		EVENT_ID3_LOADED : 'id3Loaded',
+		EVENT_ID3_AVAILABLE : 'id3Available',
 		EVENT_MP3_LOADED : 'mp3Loaded',
 		EVENT_MP3_COMPLETE : 'mp3Complete',
 
@@ -260,6 +264,10 @@ var FastrSlowrPlayr = new function(element, settings)
 		flOnMP3Loaded : function(id)
 		{
 			players[id].flOnMP3Loaded();
+		},
+		flOnID3Available : function(id, id3Data)
+		{
+			players[id].flOnMP3Loaded(id3Data);
 		}
 	};
 };
