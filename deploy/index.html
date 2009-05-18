@@ -28,6 +28,11 @@
 							autoplay:	true
 						}
 					);
+					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_MP3_LOADED, function()
+						{
+							console.log('MP3 LOADED');
+						}
+					);
 					var myPlayer2 = FastrSlowrPlayr.init(
 						{
 							elementId:	'playerHolder2',

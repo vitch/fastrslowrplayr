@@ -66,6 +66,16 @@ var FastrSlowrPlayr = new function(element, settings)
 				var doOnLoad = [];
 				
 				var eventListeners = {};
+				
+				var dispatchEvent = function(type, args)
+				{
+					var listeners = eventListeners[type];
+					if (listeners.length) {
+						for (var i=0; i<listeners.length; i++) {
+							listeners[i].apply(this, args);
+						}
+					}
+				}
 
 				// calls a method on the swf... If the swf isn't available yet then queues it to be done on load...
 				var callOnSwf = function(func, arg)
@@ -100,7 +110,7 @@ var FastrSlowrPlayr = new function(element, settings)
 					},
 					flOnMP3Loaded : function()
 					{
-						// TODO: Dispatch an event/ call a listener to allow the page to react to this...
+						dispatchEvent(FastrSlowrPlayr.EVENT_MP3_LOADED);
 						if (s.autoplay) {
 							swf.playMp3();
 						}
