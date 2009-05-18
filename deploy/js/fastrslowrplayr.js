@@ -64,6 +64,8 @@ var FastrSlowrPlayr = new function(element, settings)
 				};
 
 				var doOnLoad = [];
+				
+				var eventListeners = {};
 
 				// calls a method on the swf... If the swf isn't available yet then queues it to be done on load...
 				var callOnSwf = function(func, arg)
@@ -179,9 +181,42 @@ var FastrSlowrPlayr = new function(element, settings)
 										{
 											callOnSwf('stopMp3', null);
 										},
+					/**
+					* Adds a listener for the given type of events.
+					* The events that can be listened for are all defined by FastrSlowrPlayr.EVENT_* "constants"
+					* @param eventName  String The type of event you want to listen to.
+					* @param callback Function The function that you want to call when the event is fired.
+					**/
 					addEventListener :	function(eventName, callback)
 										{
-											throw new Error('Not implemented yet!');
+											if (!eventListeners[eventName]) {
+												eventListeners[eventName] = [];
+											}
+											eventListeners[eventName].push(callback);
+										},
+					/**
+					* Removes an event listener or all listeners for a given event type.
+					* @param eventName String The typr of event you want to remove a listener for.
+					* @param callback Function The specific listener you want to remove. If you don't pass this parameter
+					* then all listeners for this event type will be removed.
+					**/
+					removeEventListener : function(eventName, callback)
+										{
+											if (callback == undefined) {
+												eventListeners[eventName] = []
+											} else {
+												var registeredListeners = eventListeners[eventName];
+												if (registeredListeners.length) {
+													for (var i=0; i<registeredListeners.length; i++) {
+														var listener = registeredListeners[i];
+														if (listener == callback) {
+															registeredListeners.splice(i, 1);
+															// TODO: verify this actually works!
+															break;
+														}
+													}
+												}
+											}
 										}
 				}
 			};
