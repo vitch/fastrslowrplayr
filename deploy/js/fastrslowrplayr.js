@@ -115,7 +115,7 @@ var FastrSlowrPlayr = new function(element, settings)
 							swf.playMp3();
 						}
 					},
-					flOnMP3Loaded : function(id3Data)
+					flOnID3Available : function(id3Data)
 					{
 						dispatchEvent(FastrSlowrPlayr.EVENT_ID3_AVAILABLE, [id3Data]);
 					}
@@ -282,7 +282,7 @@ var FastrSlowrPlayr = new function(element, settings)
 		},
 		flOnID3Available : function(id, id3Data)
 		{
-			players[id].flOnMP3Loaded(id3Data);
+			players[id].flOnID3Available(id3Data);
 		}
 	};
 };
