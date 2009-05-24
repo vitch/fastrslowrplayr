@@ -140,6 +140,10 @@ var FastrSlowrPlayr = new function(element, settings)
 												swf.setPan(value);
 											}
 										},
+					setAutoplay :		function(value)
+										{
+											s.autoplay = value;
+										},
 					setPlaybackSpeed :	function(value) 
 										{
 											s.playbackSpeed = value;
@@ -164,6 +168,10 @@ var FastrSlowrPlayr = new function(element, settings)
 												return swf.getPan();
 											}
 											return s.pan;
+										},
+					getAutoplay :		function()
+										{
+											return s.autoplay;
 										},
 					getPlaybackSpeed :	function()
 										{
