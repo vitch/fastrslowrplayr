@@ -129,16 +129,12 @@ var FastrSlowrPlayr = new function(element, settings)
 					setVolume :			function(value) 
 										{
 											s.volume = value;
-											if (swf) {
-												swf.setVolume(value);
-											}
+											callOnSwf('setVolume', value);
 										},
 					setPan :			function(value) 
 										{
 											s.pan = value;
-											if (swf) {
-												swf.setPan(value);
-											}
+											callOnSwf('setPan', value);
 										},
 					setAutoplay :		function(value)
 										{
@@ -147,9 +143,7 @@ var FastrSlowrPlayr = new function(element, settings)
 					setPlaybackSpeed :	function(value) 
 										{
 											s.playbackSpeed = value;
-											if (swf) {
-												swf.setPlaybackSpeed(value);
-											}
+											callOnSwf('setPlaybackSpeed', value);
 										},
 					setPlayheadPosition : function(value)
 										{
