@@ -18,6 +18,7 @@ package com.kelvinluck.audio
 		
 		public static const MP3_LOADED:String = 'mp3Loaded';
 		public static const ID3_AVAILABLE:String = 'mp3Available';
+		public static const MP3_COMPLETE:String = 'mp3Complete';
 		
 		private static const BYTES_PER_CALLBACK:int = 4096; // Should be >= 2048 && <= 8192
 
@@ -151,12 +152,12 @@ package com.kelvinluck.audio
 
 		private function onMp3Loaded(event:Event):void
 		{
-			dispatchEvent(new Event(MP3Player.MP3_LOADED));
+			dispatchEvent(new Event(MP3_LOADED));
 		}
 		
 		private function onId3Loaded(event:Event):void
 		{
-			dispatchEvent(new Event(MP3Player.ID3_AVAILABLE));
+			dispatchEvent(new Event(ID3_AVAILABLE));
 		}
 
 		private function onSoundFinished(event:Event):void
@@ -167,6 +168,7 @@ package com.kelvinluck.audio
 				_channel.soundTransform = _soundTransform;
 				_channel.addEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 			}
+			dispatchEvent(new Event(MP3_COMPLETE));
 		}
 
 		private function onSampleData( event:SampleDataEvent ):void
@@ -204,6 +206,7 @@ package com.kelvinluck.audio
 				// loop
 				if (_phase >= _numSamples) {
 					if (loop) {
+						dispatchEvent(new Event(MP3_COMPLETE));
 						_phase -= _numSamples;
 					}
 					break;

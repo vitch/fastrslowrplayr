@@ -118,6 +118,10 @@ var FastrSlowrPlayr = new function(element, settings)
 					flOnID3Available : function(id3Data)
 					{
 						dispatchEvent(FastrSlowrPlayr.EVENT_ID3_AVAILABLE, [id3Data]);
+					},
+					flOnMP3Complete : function()
+					{
+						dispatchEvent(FastrSlowrPlayr.EVENT_MP3_COMPLETE);
 					}
 				};
 				// and add the private API to the array for later retrieval by id...
@@ -277,6 +281,10 @@ var FastrSlowrPlayr = new function(element, settings)
 		flOnID3Available : function(id, id3Data)
 		{
 			players[id].flOnID3Available(id3Data);
+		},
+		flOnMP3Complete : function(id)
+		{
+			players[id].flOnMP3Complete();
 		}
 	};
 };

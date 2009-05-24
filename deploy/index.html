@@ -32,7 +32,12 @@
 							console.log('MP3 LOADED - length: ' + length + 'ms');
 						}
 					);
-					myPlayer1.load('../mp3/MaTafouGninO.mp3');
+					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_MP3_COMPLETE, function()
+						{
+							console.log('MP3 COMPLETE');
+						}
+					);
+					myPlayer1.load('../mp3/amen.mp3');
 					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_ID3_AVAILABLE, function(id3Data)
 						{
 							if (id3Data) {
@@ -68,7 +73,7 @@
 					setTimeout(function() {
 						myPlayer1.stop();
 						console.log('Stopping');
-					}, 7000);
+					}, 70000);
 					// test that the playhead position is being correctly returned....
 					/*
 					setInterval(function()

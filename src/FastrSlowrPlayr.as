@@ -29,6 +29,7 @@ package
 			mp3Player = new MP3Player();
 			mp3Player.addEventListener(MP3Player.MP3_LOADED, onMp3Loaded);
 			mp3Player.addEventListener(MP3Player.ID3_AVAILABLE, onID3Available);
+			mp3Player.addEventListener(MP3Player.MP3_COMPLETE, onMP3Complete);
 			
 			id = loaderInfo.parameters.id;
 			mp3Player.playbackSpeed = loaderInfo.parameters.playbackSpeed;
@@ -145,6 +146,13 @@ package
 			if (ExternalInterface.available) {
 				var id3:Object = mp3Player.id3Info;
 				ExternalInterface.call('FastrSlowrPlayr.flOnID3Available', id, {title: id3.songName, artist: id3.artist, album: id3.album, genre:id3.genre, track: id3.track});
+			}
+		}
+		
+		private function onMP3Complete(event:Event):void
+		{
+			if (ExternalInterface.available) {
+				ExternalInterface.call('FastrSlowrPlayr.flOnMP3Complete', id);
 			}
 		}
 		
