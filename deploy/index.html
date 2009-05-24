@@ -24,7 +24,6 @@
 					var myPlayer1 = FastrSlowrPlayr.init(
 						{
 							elementId:	'playerHolder',
-							mp3File:	'../mp3/MaTafouGninO.mp3',
 							autoplay:	true
 						}
 					);
@@ -33,6 +32,7 @@
 							console.log('MP3 LOADED');
 						}
 					);
+					myPlayer1.load('../mp3/MaTafouGninO.mp3');
 					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_ID3_AVAILABLE, function(id3Data)
 						{
 							if (id3Data) {

@@ -191,6 +191,13 @@ var FastrSlowrPlayr = new function(element, settings)
 											}
 											return 0;
 										},
+					load :				function(mp3File)
+										{
+											s.mp3File = mp3File;
+											if (swf) {
+												swf.loadMp3(mp3File);
+											}
+										},
 					play :				function()
 										{
 											callOnSwf('playMp3', null);
