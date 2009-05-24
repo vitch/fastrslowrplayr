@@ -51,6 +51,7 @@ package
 				ExternalInterface.addCallback('getPlayheadPosition', getPlayheadPosition);
 				ExternalInterface.call('FastrSlowrPlayr.flOnReady', id);
 			}
+			//loadMp3('../mp3/amen.mp3');
 		}
 
 		// external interface methods...
@@ -134,8 +135,9 @@ package
 		private function onMp3Loaded(event:Event=null):void
 		{
 			if (ExternalInterface.available) {
-				ExternalInterface.call('FastrSlowrPlayr.flOnMP3Loaded', id);
+				ExternalInterface.call('FastrSlowrPlayr.flOnMP3Loaded', id, mp3Player.mp3Length);
 			}
+			//playMp3();
 		}
 		
 		private function onID3Available(event:Event):void

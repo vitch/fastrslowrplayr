@@ -108,9 +108,9 @@ var FastrSlowrPlayr = new function(element, settings)
 							swf.loadMp3(s.mp3File);
 						}
 					},
-					flOnMP3Loaded : function()
+					flOnMP3Loaded : function(length)
 					{
-						dispatchEvent(FastrSlowrPlayr.EVENT_MP3_LOADED);
+						dispatchEvent(FastrSlowrPlayr.EVENT_MP3_LOADED, [length]);
 						if (s.autoplay) {
 							swf.playMp3();
 						}
@@ -270,9 +270,9 @@ var FastrSlowrPlayr = new function(element, settings)
 		{
 			players[id].flOnReady();
 		},
-		flOnMP3Loaded : function(id)
+		flOnMP3Loaded : function(id, length)
 		{
-			players[id].flOnMP3Loaded();
+			players[id].flOnMP3Loaded(length);
 		},
 		flOnID3Available : function(id, id3Data)
 		{

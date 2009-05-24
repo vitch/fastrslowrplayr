@@ -27,9 +27,9 @@
 							autoplay:	true
 						}
 					);
-					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_MP3_LOADED, function()
+					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_MP3_LOADED, function(length)
 						{
-							console.log('MP3 LOADED');
+							console.log('MP3 LOADED - length: ' + length + 'ms');
 						}
 					);
 					myPlayer1.load('../mp3/MaTafouGninO.mp3');

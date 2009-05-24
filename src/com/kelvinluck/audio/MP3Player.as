@@ -76,6 +76,11 @@ package com.kelvinluck.audio
 		{
 			return _mp3.id3;
 		}
+		
+		public function get mp3Length():Number
+		{
+			return _mp3.length;
+		}
 
 		private var _mp3:Sound;
 		private var _dynamicSound:Sound;
