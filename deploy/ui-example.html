@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>FastrSlowrPlayrUI - a jQuery wrapper to give FastrSlowrPlayr a UI</title>
+		
+		<meta name="keywords" content="jquery,plugin,javascript,flash,mp3" />
+		<meta name="author" content="Kelvin Luck" />
+
+		<link rel="stylesheet" href="css/yui-reset-base-2.7.0.css" type="text/css" media="screen" />
+		<style type="text/css">
+		#container
+		{
+			width: 750px;
+		}
+		</style>
+
+		<script src="js/jquery.js" type="text/javascript"></script>
+		<script src="js/swfobject.js" type="text/javascript"></script>
+		<script src="js/fastrslowrplayr.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		$(function()
+			{
+				if (FastrSlowrPlayr.isAvailable()) {
+				} else {
+					alert ('FastrSlowrPlayr cannot run in this page/ browser :(\nMaybe you don\'t have flash player version 10+ installed?');
+				}
+			}
+		);
+		</script>
+
+	</head>
+
+	<body>
+		<div id="container">
+			<h1>FastrSlowrPlayrUI</h1>
+			<p>
+				<a href="index.html">FastrSlowrPlayr</a> is a javascript widget which allows you to embed a mp3 file and 
+				control it's playback via javascript. FastrSlowrPlayrUI is a wrapper around FastrSlowrPlayr which provides
+				a default user interface for FastrSlowrPlayr. It takes the form of a jQuery plugin and the plugin can be
+				skinned using the jQuery UI CSS framework. There are also a number of options which allow you to control the
+				behaviour of the created element.
+			</p>
+			<div id="playerHolder"></div>
+			<div id="playerHolder2"></div>
+		</div>
+	</body>
+</html>
