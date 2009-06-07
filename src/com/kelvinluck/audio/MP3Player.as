@@ -113,12 +113,14 @@ package com.kelvinluck.audio {
 			_mp3.addEventListener(Event.COMPLETE, onMp3Loaded);
 			_mp3.addEventListener(Event.ID3, onId3Loaded);
 			_mp3.load(request);
+			_phase = 0;
 		}
 
 		public function playLoadedSound(s:Sound):void
 		{
 			_mp3 = s;
 			play();
+			_phase = 0;
 		}
 
 		public function play():void
@@ -129,7 +131,6 @@ package com.kelvinluck.audio {
 			
 			_numSamples = int(_mp3.length * 44.1);
 			
-			_phase = 0;
 			_channel = _dynamicSound.play();
 			_isPlaying = true;
 			_channel.soundTransform = _soundTransform;
@@ -183,6 +184,7 @@ package com.kelvinluck.audio {
 				_channel.addEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 			} else {
 				_isPlaying = false;
+				_phase = 0;
 			}
 			dispatchEvent(new Event(MP3_COMPLETE));
 		}
@@ -225,6 +227,7 @@ package com.kelvinluck.audio {
 						_phase -= _numSamples;
 					} else {
 						_isPlaying = false;
+						_phase = 0;
 					}
 					break;
 				}
