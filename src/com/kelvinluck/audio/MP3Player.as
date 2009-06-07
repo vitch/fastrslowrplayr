@@ -1,5 +1,4 @@
-package com.kelvinluck.audio 
-{
+package com.kelvinluck.audio {
 	import flash.media.ID3Info;	
 	import flash.media.SoundTransform;
 	import flash.events.EventDispatcher;
@@ -15,11 +14,11 @@ package com.kelvinluck.audio
 	 */
 	public class MP3Player extends EventDispatcher
 	{
-		
+
 		public static const MP3_LOADED:String = 'mp3Loaded';
 		public static const ID3_AVAILABLE:String = 'mp3Available';
 		public static const MP3_COMPLETE:String = 'mp3Complete';
-		
+
 		private static const BYTES_PER_CALLBACK:int = 4096; // Should be >= 2048 && <= 8192
 
 		private var _playbackSpeed:Number = 1;
@@ -28,6 +27,7 @@ package com.kelvinluck.audio
 		{
 			return _playbackSpeed;
 		}
+
 		public function set playbackSpeed(value:Number):void
 		{
 			if (value < 0) {
@@ -35,7 +35,7 @@ package com.kelvinluck.audio
 			}
 			_playbackSpeed = value;
 		}
-		
+
 		/**
 		 * @return The position of the playhead as a percentage of the total length of
 		 * the loaded mp3 (0 - 1).
@@ -44,18 +44,21 @@ package com.kelvinluck.audio
 		{
 			return _phase / _numSamples;
 		}
+
 		public function set playheadPosition(value:Number):void
 		{
 			_phase = value * _numSamples;
 		}
 
 		public var loop:Boolean;
-		
+
 		private var _volume:Number;
+
 		public function get volume():Number
 		{
 			return _volume;
 		}
+
 		public function set volume(value:Number):void
 		{
 			_volume = value;
@@ -63,24 +66,32 @@ package com.kelvinluck.audio
 		}
 
 		private var _pan:Number;
+
 		public function get pan():Number
 		{
 			return _pan;
 		}
+
 		public function set pan(value:Number):void
 		{
 			_pan = value;
 			updateSoundTransform();
 		}
-		
+
 		public function get id3Info():ID3Info
 		{
 			return _mp3.id3;
 		}
-		
+
 		public function get mp3Length():Number
 		{
 			return _mp3.length;
+		}
+
+		private var _isPlaying:Boolean;
+		public function get isPlaying():Boolean
+		{
+			return _isPlaying;
 		}
 
 		private var _mp3:Sound;
@@ -89,7 +100,7 @@ package com.kelvinluck.audio
 
 		private var _phase:Number;
 		private var _numSamples:int;
-		
+
 		private var _soundTransform:SoundTransform;	
 
 		public function MP3Player()
@@ -120,16 +131,18 @@ package com.kelvinluck.audio
 			
 			_phase = 0;
 			_channel = _dynamicSound.play();
+			_isPlaying = true;
 			_channel.soundTransform = _soundTransform;
 			_channel.addEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 		}
-		
+
 		public function pause():void
 		{
 			// TODO: Check this actually works!
 			_channel.stop();
+			_isPlaying = false;
 		}
-		
+
 		// TODO: unpause??
 
 		public function stop():void
@@ -140,8 +153,9 @@ package com.kelvinluck.audio
 				_dynamicSound = null;
 				_channel = null;
 			}
+			_isPlaying = false;
 		}
-		
+
 		private function updateSoundTransform():void
 		{
 			_soundTransform = new SoundTransform(_volume, _pan);
@@ -154,7 +168,7 @@ package com.kelvinluck.audio
 		{
 			dispatchEvent(new Event(MP3_LOADED));
 		}
-		
+
 		private function onId3Loaded(event:Event):void
 		{
 			dispatchEvent(new Event(ID3_AVAILABLE));
@@ -167,6 +181,8 @@ package com.kelvinluck.audio
 				_channel = _dynamicSound.play();
 				_channel.soundTransform = _soundTransform;
 				_channel.addEventListener(Event.SOUND_COMPLETE, onSoundFinished);
+			} else {
+				_isPlaying = false;
 			}
 			dispatchEvent(new Event(MP3_COMPLETE));
 		}
@@ -196,7 +212,6 @@ package com.kelvinluck.audio
 				
 					event.data.writeFloat(l); 
 					event.data.writeFloat(r);
-					 
 				} else {
 					loadedSamples.position = loadedSamples.length;
 				}
@@ -208,6 +223,8 @@ package com.kelvinluck.audio
 					if (loop) {
 						dispatchEvent(new Event(MP3_COMPLETE));
 						_phase -= _numSamples;
+					} else {
+						_isPlaying = false;
 					}
 					break;
 				}

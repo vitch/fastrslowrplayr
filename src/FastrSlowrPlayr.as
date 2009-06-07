@@ -21,7 +21,7 @@ package
 		{
 			addEventListener(Event.ENTER_FRAME, onFirstFramePassed);
 		}
-		
+
 		private function onFirstFramePassed(event:Event):void
 		{
 			event.target.removeEventListener(event.type, arguments.callee);
@@ -46,6 +46,7 @@ package
 				ExternalInterface.addCallback('setVolume', setVolume);
 				ExternalInterface.addCallback('setPan', setPan);
 				ExternalInterface.addCallback('setPlayheadPosition', setPlayheadPosition);
+				ExternalInterface.addCallback('getIsPlaying', getIsPlaying);
 				ExternalInterface.addCallback('getPlaybackSpeed', getPlaybackSpeed);
 				ExternalInterface.addCallback('getVolume', getVolume);
 				ExternalInterface.addCallback('getPan', getPan);
@@ -111,6 +112,11 @@ package
 			mp3Player.playheadPosition = value;
 		}
 		
+		private function getIsPlaying():Boolean 
+		{
+			return mp3Player.isPlaying;
+		}
+
 		private function getPlaybackSpeed():Number
 		{
 			return mp3Player.playbackSpeed;
