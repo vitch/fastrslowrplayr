@@ -1,5 +1,16 @@
+.fsp-flash {
+	position:absolute; 
+	left:-2000px;
+}
+
+.fsp-container {
+	overflow:  hidden;
+	float:  left;
+}
+
 .fsp-button {
 	width: 16px;
 	height: 16px;
 	text-indent: -2000px;
+	float: left;
 }

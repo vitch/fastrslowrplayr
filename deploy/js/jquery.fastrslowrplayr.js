@@ -28,17 +28,18 @@
 				
 				settings.elementId = '__fsp_' + i;
 				$this
-					.append('<div style="position:absolute; left:-2000px;"><div id="' + settings.elementId + '"></div></div>')
-					.addClass('ui-widget ui-widget-content')
+					.append('<div class="fsp-flash"><div id="' + settings.elementId + '"></div></div>')
+					.addClass('ui-widget ui-widget-content fsp-container')
 					;
 				
 				var player = FastrSlowrPlayr.init(settings);
 				
 				if (settings.showPlayPauseButton) {
 					var iconDiv = $('<div>' + settings.labelPlay + '</div>')
-						.addClass('fsp-button ui-icon ui-icon-play');
+						.addClass('ui-icon ui-icon-play');
 					var playButton = $('<a href="javascript:;"></a>')
-						.addClass('ui-state-default')
+						.addClass('fsp-button ui-state-default')
+						.attr('title', settings.labelPlay)
 						.hover(
 							function()
 							{
@@ -75,12 +76,24 @@
 					$this.append(playButton);
 				}
 				if (settings.showStopButton) {
-					var stopButton = $('<a href="javascript:;">' + settings.labelStop + '</a>')
+					var stopButton = $('<a href="javascript:;"><div class="ui-icon ui-icon-stop">' + settings.labelStop + '</div></a>')
+						.addClass('fsp-button ui-state-default')
+						.attr('title', settings.labelStop)
 						.bind(
 							'click',
 							function(event)
 							{
 								player.stop();
+							}
+						)
+						.hover(
+							function()
+							{
+								stopButton.addClass('ui-state-hover');
+							},
+							function()
+							{
+								stopButton.removeClass('ui-state-hover');
 							}
 						);
 					
