@@ -20,17 +20,29 @@
 	$.fn.fastrSlowrPlayr = function(settings)
 	{
 		var settings = $.extend({}, $.fn.fastrSlowrPlayr.defaults, settings);
-
+		var i = 0;
 		return this.each(
 			function()
 			{
-				
+				if (this.id == null) { // TODO: test this path works when element doesn't have id... And test that this.id works crossbrowser...
+					this.id = 'fsp_' + i;
+				}
+				settings.elementId = this.id;
+				var player = FastrSlowrPlayr.init(settings);
+				i++;
 			}
 		);
 	}
 	
 
 	$.fn.fastrSlowrPlayr.defaults = {
+		volume:			1,
+		pan:			0,
+		autoplay:		false,
+		playbackSpeed:	1,
+		mp3File:		null,
+		swfPath:		'../swf/FastrSlowrPlayr.swf',
+		loop:			false
 	};
 
 })(jQuery);

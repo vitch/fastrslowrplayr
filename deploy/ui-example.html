@@ -17,10 +17,17 @@
 		<script src="js/jquery.js" type="text/javascript"></script>
 		<script src="js/swfobject.js" type="text/javascript"></script>
 		<script src="js/fastrslowrplayr.js" type="text/javascript"></script>
+		<script src="js/jquery.fastrslowrplayr.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		$(function()
 			{
 				if (FastrSlowrPlayr.isAvailable()) {
+					$('#playerHolder').fastrSlowrPlayr(
+						{
+							mp3File:	'../mp3/amen.mp3',
+							autoplay:	false
+						}
+					);
 				} else {
 					alert ('FastrSlowrPlayr cannot run in this page/ browser :(\nMaybe you don\'t have flash player version 10+ installed?');
 				}
