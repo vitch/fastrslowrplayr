@@ -31,7 +31,18 @@
 				
 				var player = FastrSlowrPlayr.init(settings);
 				
-				var $this = $(this);
+				
+				var playButton = $('<a href="javascript:;">' + settings.labelPlay + '</a>')
+					.bind(
+						'click',
+						function(event)
+						{
+							return false;
+						}
+					);
+				
+				$this.append(playButton);
+					
 				
 				// set up event listeners to actually trigger "proper" jQuery events...
 				player.addEventListener(
@@ -73,7 +84,11 @@
 		playbackSpeed:	1,
 		mp3File:		null,
 		swfPath:		'../swf/FastrSlowrPlayr.swf',
-		loop:			false
+		loop:			false,
+		/* localisation strings */
+		labelPlay:		'Play',
+		labelPause:		'Pause',
+		labelStop:		'Stop'
 	};
 
 })(jQuery);
