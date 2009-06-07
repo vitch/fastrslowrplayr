@@ -125,7 +125,7 @@ package com.kelvinluck.audio {
 
 		public function play():void
 		{
-			stop();
+			stop(false);
 			_dynamicSound = new Sound();
 			_dynamicSound.addEventListener(SampleDataEvent.SAMPLE_DATA, onSampleData);
 			
@@ -146,13 +146,16 @@ package com.kelvinluck.audio {
 
 		// TODO: unpause??
 
-		public function stop():void
+		public function stop(resetPhase:Boolean = true):void
 		{
 			if (_dynamicSound) {
 				_dynamicSound.removeEventListener(SampleDataEvent.SAMPLE_DATA, onSampleData);
 				_channel.removeEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 				_dynamicSound = null;
 				_channel = null;
+			}
+			if (resetPhase) {
+				_phase = 0;
 			}
 			_isPlaying = false;
 		}

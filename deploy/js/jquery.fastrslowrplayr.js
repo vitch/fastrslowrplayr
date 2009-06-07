@@ -31,25 +31,38 @@
 				
 				var player = FastrSlowrPlayr.init(settings);
 				
-				
-				var playButton = $('<a href="javascript:;">' + settings.labelPlay + '</a>')
-					.bind(
-						'click',
-						function(event)
-						{
-							if (player.getIsPlaying()) {
-								player.pause();
-								playButton
-									.text(settings.labelPlay);
-							} else {
-								player.play();
-								playButton
-									.text(settings.labelPause);
+				if (settings.showPlayPauseButton) {
+					var playButton = $('<a href="javascript:;">' + settings.labelPlay + '</a>')
+						.bind(
+							'click',
+							function(event)
+							{
+								if (player.getIsPlaying()) {
+									player.pause();
+									playButton
+										.text(settings.labelPlay);
+								} else {
+									player.play();
+									playButton
+										.text(settings.labelPause);
+								}
 							}
-						}
-					);
-				
-				$this.append(playButton);
+						);
+					
+					$this.append(playButton);
+				}
+				if (settings.showStopButton) {
+					var stopButton = $('<a href="javascript:;">' + settings.labelStop + '</a>')
+						.bind(
+							'click',
+							function(event)
+							{
+								player.stop();
+							}
+						);
+					
+					$this.append(stopButton);
+				}
 					
 				
 				// set up event listeners to actually trigger "proper" jQuery events...
@@ -86,6 +99,7 @@
 	
 
 	$.fn.fastrSlowrPlayr.defaults = {
+		/* FastrSlowrPlayr settings */
 		volume:			1,
 		pan:			0,
 		autoplay:		false,
@@ -93,6 +107,12 @@
 		mp3File:		null,
 		swfPath:		'../swf/FastrSlowrPlayr.swf',
 		loop:			false,
+		/* settings to control which UI features are displayed */
+		showPlayPauseButton: true,
+		showStopButton:	true,
+		showProgressBar: true,
+		showSongInfo:	false,
+		showLoadingBar:	true,
 		/* localisation strings */
 		labelPlay:		'Play',
 		labelPause:		'Pause',
