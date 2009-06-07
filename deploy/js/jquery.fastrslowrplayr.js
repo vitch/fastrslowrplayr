@@ -24,12 +24,10 @@
 		return this.each(
 			function()
 			{
-				if (this.id == null) { 
-					// TODO: test this path works when element doesn't have id... 
-					// And test that this.id works crossbrowser...
-					this.id = 'fsp_' + i;
-				}
-				settings.elementId = this.id;
+				var $this = $(this);
+				
+				settings.elementId = '__fsp_' + i;
+				$this.append('<div style="position:absolute; left:-2000px;"><div id="' + settings.elementId + '"></div></div>');
 				
 				var player = FastrSlowrPlayr.init(settings);
 				
