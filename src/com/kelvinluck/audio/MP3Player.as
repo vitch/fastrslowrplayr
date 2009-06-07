@@ -139,12 +139,9 @@ package com.kelvinluck.audio {
 
 		public function pause():void
 		{
-			// TODO: Check this actually works!
 			_channel.stop();
 			_isPlaying = false;
 		}
-
-		// TODO: unpause??
 
 		public function stop(resetPhase:Boolean = true):void
 		{
