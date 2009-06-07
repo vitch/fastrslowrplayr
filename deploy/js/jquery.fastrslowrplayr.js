@@ -24,11 +24,44 @@
 		return this.each(
 			function()
 			{
-				if (this.id == null) { // TODO: test this path works when element doesn't have id... And test that this.id works crossbrowser...
+				if (this.id == null) { 
+					// TODO: test this path works when element doesn't have id... 
+					// And test that this.id works crossbrowser...
 					this.id = 'fsp_' + i;
 				}
 				settings.elementId = this.id;
+				
 				var player = FastrSlowrPlayr.init(settings);
+				
+				var $this = $(this);
+				
+				// set up event listeners to actually trigger "proper" jQuery events...
+				player.addEventListener(
+					FastrSlowrPlayr.EVENT_MP3_LOADED, 
+					function(length)
+					{
+						$this.trigger(FastrSlowrPlayr.EVENT_MP3_LOADED, length);
+					}
+				);
+				player.addEventListener(
+					FastrSlowrPlayr.EVENT_MP3_COMPLETE, 
+					function()
+					{
+						$this.trigger(FastrSlowrPlayr.EVENT_MP3_COMPLETE);
+					}
+				);
+				player.addEventListener(
+					FastrSlowrPlayr.EVENT_ID3_AVAILABLE, 
+					function(id3Data)
+					{
+						if (id3Data) {
+							$this.trigger(FastrSlowrPlayr.EVENT_ID3_AVAILABLE, id3Data);
+							// it seems to be triggered multiple times - we only want the first one...
+							player.removeEventListener(FastrSlowrPlayr.EVENT_ID3_AVAILABLE);
+							// TODO: Reinstate the listener if load called...
+						}
+					}
+				);
 				i++;
 			}
 		);

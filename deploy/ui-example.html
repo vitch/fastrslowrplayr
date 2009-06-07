@@ -24,8 +24,28 @@
 				if (FastrSlowrPlayr.isAvailable()) {
 					$('#playerHolder').fastrSlowrPlayr(
 						{
-							mp3File:	'../mp3/amen.mp3',
+							mp3File:	'../mp3/MaTafouGninO.mp3',
 							autoplay:	false
+						}
+					).bind(
+						FastrSlowrPlayr.EVENT_MP3_LOADED, 
+						function(event, length)
+						{
+							console.log('MP3 LOADED - length: ' + length + 'ms');
+						}
+					).bind(
+						FastrSlowrPlayr.EVENT_MP3_COMPLETE, 
+						function()
+						{
+							console.log('MP3 COMPLETE');
+						}
+					).bind(
+						FastrSlowrPlayr.EVENT_ID3_AVAILABLE, 
+						function(event, id3Data)
+						{
+							if (id3Data) {
+								console.log('ID3 AVAILABLE', id3Data);
+							}
 						}
 					);
 				} else {
