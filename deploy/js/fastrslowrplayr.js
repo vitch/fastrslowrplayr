@@ -70,7 +70,7 @@ var FastrSlowrPlayr = new function(element, settings)
 				var dispatchEvent = function(type, args)
 				{
 					var listeners = eventListeners[type];
-					if (listeners.length) {
+					if (listeners && listeners.length) {
 						for (var i=0; i<listeners.length; i++) {
 							listeners[i].apply(this, args);
 						}
