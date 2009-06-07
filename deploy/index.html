@@ -82,7 +82,7 @@
 					}, 100);
 					*/
 				} else {
-					alert ('FastrSlowrPlayr cannot run in this page/ browser :(');
+					alert ('FastrSlowrPlayr cannot run in this page/ browser :(\nMaybe you don\'t have flash player version 10+ installed?');
 				}
 			}
 		);
@@ -94,14 +94,18 @@
 		<div id="container">
 			<h1>FastrSlowrPlayr</h1>
 			<p>
-				FastrSlowrPlayr is a javascript widget which allows you to embed a mp3 file and control it's playback via javascript. It provides you
-				with easy access to the various things you may want to do to the mp3 (e.g. playing, stopping, changing the volume etc) but it also
-				allows you to change the playback speed (and therefore pitch) of the playing mp3.
+				FastrSlowrPlayr is a javascript widget which allows you to embed a mp3 file and control it's playback via javascript. 
+				It provides you with easy access to the various things you may want to do to the mp3 (e.g. playing, stopping, 
+				changing the volume etc) and it also allows you to change the playback speed (and therefore pitch) of the playing mp3.
 			</p>
 			<p>
-				The simple example on this page shows how you can embed an mp3 in a page which automatically loads and plays. The swf which powers the
-				mp3 playback is included in the dev with an id of playerHolder (below) although it has no visual component so there is nothing to see
-				there...
+				The simple example on this page shows how you can embed an mp3 in a page which automatically loads and plays. 
+				The swf which powers the mp3 playback is included in the div with an id of playerHolder (below) although it 
+				has no visual component so there is nothing to see there...
+			</p>
+			<p>
+				This page uses console.log to give debugging messages and tries to do various things to the loaded mp3 file to test
+				different pieces of FastrSlowrPlayr's functionality. View source to see what's going on!
 			</p>
 			<div id="playerHolder"></div>
 			<div id="playerHolder2"></div>
