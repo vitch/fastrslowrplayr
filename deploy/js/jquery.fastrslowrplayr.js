@@ -37,7 +37,15 @@
 						'click',
 						function(event)
 						{
-							return false;
+							if (player.getIsPlaying()) {
+								player.pause();
+								playButton
+									.text(settings.labelPlay);
+							} else {
+								player.play();
+								playButton
+									.text(settings.labelPause);
+							}
 						}
 					);
 				
