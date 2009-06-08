@@ -122,6 +122,10 @@ var FastrSlowrPlayr = new function(element, settings)
 					flOnMP3Complete : function()
 					{
 						dispatchEvent(FastrSlowrPlayr.EVENT_MP3_COMPLETE);
+					},
+					flOnMP3PlayStateChange : function()
+					{
+						dispatchEvent(FastrSlowrPlayr.PLAY_STATE_CHANGE, [swf.getIsPlaying()]);
 					}
 				};
 				// and add the private API to the array for later retrieval by id...
@@ -268,6 +272,7 @@ var FastrSlowrPlayr = new function(element, settings)
 		EVENT_ID3_AVAILABLE : 'id3Available',
 		EVENT_MP3_LOADED : 'mp3Loaded',
 		EVENT_MP3_COMPLETE : 'mp3Complete',
+		PLAY_STATE_CHANGE : 'playStateChange',
 
 		// The following methods should not be called directly. They are used for callbacks from the flash file.
 		// Unfortunately, because of the nature of the ExternalInterface callbacks from Flash we can't make these
@@ -289,6 +294,10 @@ var FastrSlowrPlayr = new function(element, settings)
 		flOnMP3Complete : function(id)
 		{
 			players[id].flOnMP3Complete();
+		},
+		flOnMP3PlayStateChange : function(id)
+		{
+			players[id].flOnMP3PlayStateChange();
 		}
 	};
 };

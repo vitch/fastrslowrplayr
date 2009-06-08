@@ -54,21 +54,8 @@
 							'click',
 							function(event)
 							{
-								if (player.getIsPlaying()) {
-									player.pause();
-									playButton.attr('title', settings.labelPlay);
-									iconDiv
-										.text(settings.labelPlay)
-										.removeClass('ui-icon-pause')
-										.addClass('ui-icon-play');
-								} else {
-									player.play();
-									playButton.attr('title', settings.labelPause);
-									iconDiv
-										.text(settings.labelPause)
-										.removeClass('ui-icon-play')
-										.addClass('ui-icon-pause');
-								}
+								player[player.getIsPlaying() ? 'pause' : 'play']();
+								updatePlayPauseButton(player.getIsPlaying());
 							}
 						);
 					playButton.append(iconDiv);
@@ -99,7 +86,24 @@
 					
 					$this.append(stopButton);
 				}
-					
+				
+				function updatePlayPauseButton(isPlaying)
+				{
+					if (!playButton) return; // If play button wasn't displayed then don't try to update it!
+					if (isPlaying) {
+						playButton.attr('title', settings.labelPause);
+						iconDiv
+							.text(settings.labelPause)
+							.removeClass('ui-icon-play')
+							.addClass('ui-icon-pause');
+					} else {
+						playButton.attr('title', settings.labelPlay);
+						iconDiv
+							.text(settings.labelPlay)
+							.removeClass('ui-icon-pause')
+							.addClass('ui-icon-play');
+					}
+				}
 				
 				// set up event listeners to actually trigger "proper" jQuery events...
 				player.addEventListener(
@@ -126,6 +130,13 @@
 							player.removeEventListener(FastrSlowrPlayr.EVENT_ID3_AVAILABLE);
 							// TODO: Reinstate the listener if load called...
 						}
+					}
+				);
+				player.addEventListener(
+					FastrSlowrPlayr.PLAY_STATE_CHANGE,
+					function(isPlaying)
+					{
+						updatePlayPauseButton(isPlaying);
 					}
 				);
 				i++;

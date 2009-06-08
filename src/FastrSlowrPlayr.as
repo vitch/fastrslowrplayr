@@ -30,6 +30,7 @@ package
 			mp3Player.addEventListener(MP3Player.MP3_LOADED, onMp3Loaded);
 			mp3Player.addEventListener(MP3Player.ID3_AVAILABLE, onID3Available);
 			mp3Player.addEventListener(MP3Player.MP3_COMPLETE, onMP3Complete);
+			mp3Player.addEventListener(MP3Player.PLAY_STATE_CHANGED, onMP3PlayStateChange);
 			
 			id = loaderInfo.parameters.id;
 			mp3Player.playbackSpeed = loaderInfo.parameters.playbackSpeed;
@@ -159,6 +160,13 @@ package
 		{
 			if (ExternalInterface.available) {
 				ExternalInterface.call('FastrSlowrPlayr.flOnMP3Complete', id);
+			}
+		}
+		
+		private function onMP3PlayStateChange(event:Event):void
+		{
+			if (ExternalInterface.available) {
+				ExternalInterface.call('FastrSlowrPlayr.flOnMP3PlayStateChange', id);
 			}
 		}
 		

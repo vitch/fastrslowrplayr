@@ -18,6 +18,7 @@ package com.kelvinluck.audio {
 		public static const MP3_LOADED:String = 'mp3Loaded';
 		public static const ID3_AVAILABLE:String = 'mp3Available';
 		public static const MP3_COMPLETE:String = 'mp3Complete';
+		public static const PLAY_STATE_CHANGED:String = 'playStateChanged';
 
 		private static const BYTES_PER_CALLBACK:int = 4096; // Should be >= 2048 && <= 8192
 
@@ -87,11 +88,19 @@ package com.kelvinluck.audio {
 		{
 			return _mp3.length;
 		}
-
+		
 		private var _isPlaying:Boolean;
 		public function get isPlaying():Boolean
 		{
 			return _isPlaying;
+		}
+		// TODO: This shouldn't be public but mxmlc is complaining when there is a public getter and private setter :(
+		public function set isPlaying(value:Boolean):void
+		{
+			if (value != _isPlaying) {
+				_isPlaying = value;
+				dispatchEvent(new Event(PLAY_STATE_CHANGED));
+			}
 		}
 
 		private var _mp3:Sound;
@@ -132,7 +141,7 @@ package com.kelvinluck.audio {
 			_numSamples = int(_mp3.length * 44.1);
 			
 			_channel = _dynamicSound.play();
-			_isPlaying = true;
+			isPlaying = true;
 			_channel.soundTransform = _soundTransform;
 			_channel.addEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 		}
@@ -140,7 +149,7 @@ package com.kelvinluck.audio {
 		public function pause():void
 		{
 			_channel.stop();
-			_isPlaying = false;
+			isPlaying = false;
 		}
 
 		public function stop(resetPhase:Boolean = true):void
@@ -154,7 +163,7 @@ package com.kelvinluck.audio {
 			if (resetPhase) {
 				_phase = 0;
 			}
-			_isPlaying = false;
+			isPlaying = false;
 		}
 
 		private function updateSoundTransform():void
@@ -183,7 +192,7 @@ package com.kelvinluck.audio {
 				_channel.soundTransform = _soundTransform;
 				_channel.addEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 			} else {
-				_isPlaying = false;
+				isPlaying = false;
 				_phase = 0;
 			}
 			dispatchEvent(new Event(MP3_COMPLETE));
@@ -226,7 +235,7 @@ package com.kelvinluck.audio {
 						dispatchEvent(new Event(MP3_COMPLETE));
 						_phase -= _numSamples;
 					} else {
-						_isPlaying = false;
+						isPlaying = false;
 						_phase = 0;
 					}
 					break;
