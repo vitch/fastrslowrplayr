@@ -162,12 +162,23 @@
 						}
 					}
 				);
+				
+				// Add internal event listeners to act on commands passed into the plugin...
+				$this.bind(
+					FastrSlowrPlayr.COMMAND_LOAD_MP3,
+					function(event, mp3Path)
+					{
+						player.stop();
+						player.load(mp3Path);
+					}
+				);
 				i++;
 			}
 		);
 	}
 	
-
+	FastrSlowrPlayr.COMMAND_LOAD_MP3 = 'commandLoadMp3';
+	
 	$.fn.fastrSlowrPlayr.defaults = {
 		/* FastrSlowrPlayr settings */
 		volume:			1,

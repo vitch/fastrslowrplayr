@@ -15,6 +15,10 @@
 		{
 			width: 750px;
 		}
+		#playerHolder
+		{
+			margin-bottom: 1em;
+		}
 		</style>
 
 		<script src="js/jquery.js" type="text/javascript"></script>
@@ -51,6 +55,15 @@
 							}
 						}
 					);
+					
+					$('#loadMp3Link').bind(
+						'click',
+						function(event)
+						{
+							$('#playerHolder').trigger(FastrSlowrPlayr.COMMAND_LOAD_MP3, '../mp3/amen.mp3');
+							return false;
+						}
+					);
 				} else {
 					alert ('FastrSlowrPlayr cannot run in this page/ browser :(\nMaybe you don\'t have flash player version 10+ installed?');
 				}
@@ -71,6 +84,12 @@
 				behaviour of the created element.
 			</p>
 			<div id="playerHolder"></div>
+			<p style="clear: left">
+				It is possible to call some commands on an existing player to modify it's behaviour. For example, 
+				<a href="youNeedJS.html" id="loadMp3Link">click here</a> to load a new mp3 into the player above (note that
+				it will first stop a currently playing mp3 and that the loaded mp3 will respect the autoplay setting to
+				decide whether to start playing or not).
+			</p>
 			<div id="playerHolder2"></div>
 		</div>
 	</body>
