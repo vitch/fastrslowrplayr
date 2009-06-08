@@ -184,7 +184,7 @@ package com.kelvinluck.audio {
 			dispatchEvent(new Event(ID3_AVAILABLE));
 		}
 
-		private function onSoundFinished(event:Event):void
+		private function onSoundFinished(event:Event=null):void
 		{
 			_channel.removeEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 			if (loop) {
@@ -192,8 +192,7 @@ package com.kelvinluck.audio {
 				_channel.soundTransform = _soundTransform;
 				_channel.addEventListener(Event.SOUND_COMPLETE, onSoundFinished);
 			} else {
-				isPlaying = false;
-				_phase = 0;
+				stop();
 			}
 			dispatchEvent(new Event(MP3_COMPLETE));
 		}
@@ -235,8 +234,7 @@ package com.kelvinluck.audio {
 						dispatchEvent(new Event(MP3_COMPLETE));
 						_phase -= _numSamples;
 					} else {
-						isPlaying = false;
-						_phase = 0;
+						onSoundFinished();
 					}
 					break;
 				}
