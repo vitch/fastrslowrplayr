@@ -96,6 +96,13 @@
 					$this.append(progressBar);
 				}
 				
+				function updateProgressBarPosition()
+				{
+					if (progressBarTrack) {
+						progressBarTrack.css('left', (Math.round(player.getPlayheadPosition() * 100) - 100) + '%');
+					}
+				}
+				
 				// set up event listeners to actually trigger "proper" jQuery events...
 				player.addEventListener(
 					FastrSlowrPlayr.EVENT_MP3_LOADED, 
@@ -145,19 +152,12 @@
 							}
 						}
 						if (isPlaying) {
-							if (progressBarTrack) {
-								updateProgressInterval = setInterval(
-									function()
-									{
-										progressBarTrack.css('left', (Math.round(player.getPlayheadPosition() * 100) - 100) + '%');
-									},
-									200
-								);
-							}
+							updateProgressInterval = setInterval(updateProgressBarPosition, 200);
 						} else {
 							if (updateProgressInterval) {
 								clearInterval(updateProgressInterval);
 								updateProgressInterval = null;
+								updateProgressBarPosition();
 							}
 						}
 					}
