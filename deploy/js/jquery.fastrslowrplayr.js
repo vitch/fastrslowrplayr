@@ -123,6 +123,8 @@
 						}
 					}
 				);
+				
+				var updateProgressInterval;
 				player.addEventListener(
 					FastrSlowrPlayr.PLAY_STATE_CHANGE,
 					function(isPlaying)
@@ -140,6 +142,22 @@
 									.text(settings.labelPlay)
 									.removeClass('ui-icon-pause')
 									.addClass('ui-icon-play');
+							}
+						}
+						if (isPlaying) {
+							if (progressBarTrack) {
+								updateProgressInterval = setInterval(
+									function()
+									{
+										progressBarTrack.css('left', (Math.round(player.getPlayheadPosition() * 100) - 100) + '%');
+									},
+									200
+								);
+							}
+						} else {
+							if (updateProgressInterval) {
+								clearInterval(updateProgressInterval);
+								updateProgressInterval = null;
 							}
 						}
 					}
