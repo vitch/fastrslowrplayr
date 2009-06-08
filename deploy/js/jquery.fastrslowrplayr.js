@@ -61,6 +61,7 @@
 					
 					$this.append(playPauseButton);
 				}
+				
 				if (settings.showStopButton) {
 					var stopButton = $('<a href="javascript:;"><div class="ui-icon ui-icon-stop">' + settings.labelStop + '</div></a>')
 						.addClass('fsp-button ui-state-default')
@@ -84,6 +85,15 @@
 						);
 					
 					$this.append(stopButton);
+				}
+				
+				if (settings.showProgressBar) {
+					var progressBar = $('<div></div>')
+						.addClass('fsp-progress-bar ui-widget-content');
+					var progressBarTrack = $('<div></div>')
+						.addClass('fsp-progress-bar-track ui-widget-header');
+					progressBar.append(progressBarTrack);
+					$this.append(progressBar);
 				}
 				
 				// set up event listeners to actually trigger "proper" jQuery events...
@@ -149,12 +159,13 @@
 		mp3File:		null,
 		swfPath:		'../swf/FastrSlowrPlayr.swf',
 		loop:			false,
-		/* settings to control which UI features are displayed */
+		/* settings to control which UI features are displayed and enabled */
 		showPlayPauseButton: true,
 		showStopButton:	true,
 		showProgressBar: true,
+		allowProgressBarDrag: false,
 		showSongInfo:	false,
-		showLoadingBar:	true,
+		showLoadingBar:	false,
 		/* localisation strings */
 		labelPlay:		'Play',
 		labelPause:		'Pause',

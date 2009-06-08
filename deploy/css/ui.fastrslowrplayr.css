@@ -14,3 +14,19 @@
 	text-indent: -2000px;
 	float: left;
 }
+
+.fsp-progress-bar {
+	float: left;
+	height: 16px;
+	width: 200px;
+	position: relative;
+	overflow: hidden;
+}
+
+.fsp-progress-bar-track {
+	height: 18px;
+	width: 200px;
+	position: absolute;
+	top: -1px;
+	left: -100%;
+}
