@@ -55,7 +55,6 @@
 							function(event)
 							{
 								player[player.getIsPlaying() ? 'pause' : 'play']();
-								updatePlayPauseButton(player.getIsPlaying());
 							}
 						);
 					playButton.append(iconDiv);
@@ -85,24 +84,6 @@
 						);
 					
 					$this.append(stopButton);
-				}
-				
-				function updatePlayPauseButton(isPlaying)
-				{
-					if (!playButton) return; // If play button wasn't displayed then don't try to update it!
-					if (isPlaying) {
-						playButton.attr('title', settings.labelPause);
-						iconDiv
-							.text(settings.labelPause)
-							.removeClass('ui-icon-play')
-							.addClass('ui-icon-pause');
-					} else {
-						playButton.attr('title', settings.labelPlay);
-						iconDiv
-							.text(settings.labelPlay)
-							.removeClass('ui-icon-pause')
-							.addClass('ui-icon-play');
-					}
 				}
 				
 				// set up event listeners to actually trigger "proper" jQuery events...
@@ -136,7 +117,21 @@
 					FastrSlowrPlayr.PLAY_STATE_CHANGE,
 					function(isPlaying)
 					{
-						updatePlayPauseButton(isPlaying);
+						if (playButton) {
+							if (isPlaying) {
+								playButton.attr('title', settings.labelPause);
+								iconDiv
+									.text(settings.labelPause)
+									.removeClass('ui-icon-play')
+									.addClass('ui-icon-pause');
+							} else {
+								playButton.attr('title', settings.labelPlay);
+								iconDiv
+									.text(settings.labelPlay)
+									.removeClass('ui-icon-pause')
+									.addClass('ui-icon-play');
+							}
+						}
 					}
 				);
 				i++;
