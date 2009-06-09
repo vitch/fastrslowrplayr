@@ -57,13 +57,8 @@
 					);
 					
 					var player = $('#playerHolder').data('fsp-player');
-					console.log(player);
-					setInterval(function()
-						{
-							console.log(player.getPlayheadPosition());
-						},
-						200
-					);
+					// player is now the public api onto this fastrslowrplayr instance..
+					// so you can call set*, get*, load, play, pause and stop on it if you like...
 					
 					$('#loadMp3Link').bind(
 						'click',
