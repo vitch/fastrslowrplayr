@@ -172,6 +172,10 @@
 						player.load(mp3Path);
 					}
 				);
+				
+				// Expose the player object so it is available to plugin users...
+				$this.data('fsp-player', player);
+				
 				i++;
 			}
 		);

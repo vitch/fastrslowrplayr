@@ -56,6 +56,15 @@
 						}
 					);
 					
+					var player = $('#playerHolder').data('fsp-player');
+					console.log(player);
+					setInterval(function()
+						{
+							console.log(player.getPlayheadPosition());
+						},
+						200
+					);
+					
 					$('#loadMp3Link').bind(
 						'click',
 						function(event)
