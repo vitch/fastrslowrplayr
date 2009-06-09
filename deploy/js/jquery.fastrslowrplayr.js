@@ -103,6 +103,14 @@
 					}
 				}
 				
+				/*
+				if (settings.showVolumeControl) {
+					$this.append('<div class="fsp-button ui-state-default"><div class="ui-icon ui-icon-volume-off"></div></div>');
+					$this.append('<div class="fsp-button ui-state-default"><div class="ui-icon ui-icon-volume-on"></div></div>');
+					$this.append('<div class="fsp-button ui-state-default"><div class="ui-icon ui-icon-signal"></div></div>');
+				}
+				*/
+				
 				// set up event listeners to actually trigger "proper" jQuery events...
 				player.addEventListener(
 					FastrSlowrPlayr.EVENT_MP3_LOADED, 
@@ -197,6 +205,7 @@
 		showStopButton:	true,
 		showProgressBar: true,
 		allowProgressBarDrag: false,
+		/*showVolumeControl: true,*/
 		showSongInfo:	false,
 		showLoadingBar:	false,
 		/* localisation strings */
