@@ -193,7 +193,7 @@ var FastrSlowrPlayr = new function(element, settings)
 					getPlayheadPosition : function()
 										{
 											if (swf) {
-												return swf.getPlayheadPosition();
+												return swf.getPlayheadPosition() || 0;
 											}
 											return 0;
 										},
