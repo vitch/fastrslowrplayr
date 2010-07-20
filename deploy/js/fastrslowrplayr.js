@@ -72,7 +72,11 @@ var FastrSlowrPlayr = new function(element, settings)
 					var listeners = eventListeners[type];
 					if (listeners && listeners.length) {
 						for (var i=0; i<listeners.length; i++) {
-							listeners[i].apply(this, args);
+							if (args) {
+								listeners[i].apply(this, args);
+							} else {
+								listeners[i].apply(this);
+							}
 						}
 					}
 				}
