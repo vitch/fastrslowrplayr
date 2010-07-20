@@ -28,6 +28,7 @@
 				if (FastrSlowrPlayr.isAvailable()) {
 					var myPlayer1 = FastrSlowrPlayr.init(
 						{
+							swfPath: 'swf/FastrSlowrPlayr.swf',
 							elementId:	'playerHolder',
 							autoplay:	true
 						}
@@ -42,7 +43,7 @@
 							console.log('MP3 COMPLETE');
 						}
 					);
-					myPlayer1.load('../mp3/amen.mp3');
+					myPlayer1.load('mp3/amen.mp3');
 					myPlayer1.addEventListener(FastrSlowrPlayr.EVENT_ID3_AVAILABLE, function(id3Data)
 						{
 							if (id3Data) {
@@ -54,8 +55,9 @@
 					);
 					var myPlayer2 = FastrSlowrPlayr.init(
 						{
+							swfPath: 'swf/FastrSlowrPlayr.swf',
 							elementId:	'playerHolder2',
-							mp3File:	'../mp3/amen.mp3',
+							mp3File:	'mp3/amen.mp3',
 							autoplay:	false
 						}
 					);

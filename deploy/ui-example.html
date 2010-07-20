@@ -31,7 +31,8 @@
 				if (FastrSlowrPlayr.isAvailable()) {
 					$('#playerHolder').fastrSlowrPlayr(
 						{
-							mp3File:	'../mp3/MaTafouGninO.mp3',
+							swfPath: 'swf/FastrSlowrPlayr.swf',
+							mp3File:	'mp3/MaTafouGninO.mp3',
 							autoplay:	false
 						}
 					).bind(
@@ -64,7 +65,7 @@
 						'click',
 						function(event)
 						{
-							$('#playerHolder').trigger(FastrSlowrPlayr.COMMAND_LOAD_MP3, '../mp3/amen.mp3');
+							$('#playerHolder').trigger(FastrSlowrPlayr.COMMAND_LOAD_MP3, 'mp3/amen.mp3');
 							return false;
 						}
 					);
